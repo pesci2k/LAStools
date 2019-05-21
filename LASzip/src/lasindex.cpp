@@ -342,7 +342,7 @@ BOOL LASindex::read(const char* file_name)
     name[strlen(name)-2] = 'a';
     name[strlen(name)-1] = 'x';
   }
-  FILE* file = fopen(name, "rb");
+  FILE* file = fopen(widen(name).c_str(), widen("rb").c_str());
   if (file == 0)
   {
     free(name);
@@ -379,7 +379,7 @@ BOOL LASindex::append(const char* file_name) const
 
   lasreader->close();
 
-  FILE* file = fopen(file_name, "rb");
+  FILE* file = fopen(widen(file_name).c_str(), widen("rb").c_str());
   ByteStreamIn* bytestreamin = 0;
   if (IS_LITTLE_ENDIAN())
     bytestreamin = new ByteStreamInFileLE(file);
@@ -443,7 +443,7 @@ BOOL LASindex::append(const char* file_name) const
   fclose(file);
 
   ByteStreamOut* bytestreamout;
-  file = fopen(file_name, "rb+");
+  file = fopen(widen(file_name).c_str(), widen("rb+").c_str());
   if (IS_LITTLE_ENDIAN())
     bytestreamout = new ByteStreamOutFileLE(file);
   else
@@ -517,7 +517,7 @@ BOOL LASindex::write(const char* file_name) const
     name[strlen(name)-2] = 'a';
     name[strlen(name)-1] = 'x';
   }
-  FILE* file = fopen(name, "wb");
+  FILE* file = fopen(widen(name).c_str(), widen("wb").c_str());
   if (file == 0)
   {
     fprintf(stderr,"ERROR (LASindex): cannot open '%s' for write\n", name);

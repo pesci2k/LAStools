@@ -92,7 +92,7 @@ BOOL LASreaderBIL::open(const CHAR* file_name)
 
   // open the BIL file
 
-  file = fopen(file_name, "rb");
+  file = fopen(widen(file_name).c_str(), widen("rb").c_str());
   if (file == 0)
   {
     fprintf(stderr, "ERROR: cannot open file '%s'\n", file_name);
@@ -114,7 +114,7 @@ BOOL LASreaderBIL::open(const CHAR* file_name)
 #ifdef _WIN32
   WIN32_FILE_ATTRIBUTE_DATA attr;
 	SYSTEMTIME creation;
-  GetFileAttributesEx(file_name, GetFileExInfoStandard, &attr);
+  GetFileAttributesEx(widen(file_name).c_str(), GetFileExInfoStandard, &attr);
 	FileTimeToSystemTime(&attr.ftCreationTime, &creation);
   int startday[13] = {-1, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
   header.file_creation_day = startday[creation.wMonth] + creation.wDay;
@@ -362,7 +362,7 @@ BOOL LASreaderBIL::read_hdr_file(const CHAR* file_name)
   file_name_hdr[len+2] = 'd';
   file_name_hdr[len+3] = 'r';
 
-  FILE* file = fopen(file_name_hdr, "r");
+  FILE* file = fopen(widen(file_name_hdr).c_str(), widen("r").c_str());
 
   if (file == 0)
   {
@@ -370,7 +370,7 @@ BOOL LASreaderBIL::read_hdr_file(const CHAR* file_name)
     file_name_hdr[len+2] = 'D';
     file_name_hdr[len+3] = 'R';
 
-    file = fopen(file_name_hdr, "r");
+    file = fopen(widen(file_name_hdr).c_str(), widen("r").c_str());
     free(file_name_hdr);
 
     if (file == 0)
@@ -535,7 +535,7 @@ BOOL LASreaderBIL::read_blw_file(const CHAR* file_name)
   file_name_bwl[len+2] = 'l';
   file_name_bwl[len+3] = 'w';
 
-  FILE* file = fopen(file_name_bwl, "r");
+  FILE* file = fopen(widen(file_name_bwl).c_str(), widen("r").c_str());
 
   if (file == 0)
   {
@@ -543,7 +543,7 @@ BOOL LASreaderBIL::read_blw_file(const CHAR* file_name)
     file_name_bwl[len+2] = 'L';
     file_name_bwl[len+3] = 'W';
 
-    file = fopen(file_name_bwl, "r");
+    file = fopen(widen(file_name_bwl).c_str(), widen("r").c_str());
 
     if (file == 0)
     {
@@ -821,7 +821,7 @@ BOOL LASreaderBIL::reopen(const CHAR* file_name)
     return FALSE;
   }
 
-  file = fopen(file_name, "rb");
+  file = fopen(widen(file_name).c_str(), widen("rb").c_str());
   if (file == 0)
   {
     fprintf(stderr, "ERROR: cannot reopen file '%s'\n", file_name);

@@ -1020,7 +1020,7 @@ int main(int argc, char *argv[])
 
       // open output file
 
-      file_out = fopen(file_name_out, "w");
+      file_out = fopen(widen(file_name_out).c_str(), widen("w").c_str());
 
       // fail if output file does not open
 

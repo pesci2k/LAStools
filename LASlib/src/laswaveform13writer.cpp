@@ -145,7 +145,7 @@ BOOL LASwaveform13writer::open(const char* file_name, const LASvlr_wave_packet_d
     file_name_temp[len-2] = 'd';
     file_name_temp[len-1] = (compressed ? 'z' : 'p');
   }
-  file = fopen(file_name_temp, "wb");
+  file = fopen(widen(file_name_temp).c_str(), widen("wb").c_str());
 
   if (file == 0)
   {

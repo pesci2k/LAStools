@@ -39,6 +39,7 @@
 #include <string.h>
 #ifdef _WIN32
 #include <windows.h>
+#include <unicode.hpp>
 #else
 #include <unistd.h>
 #endif
@@ -1878,7 +1879,7 @@ static FILE* open_geo_file(const char* program_name, bool pcs=true)
 #ifdef _WIN32
   if (program_name)
   {
-    GetModuleFileName(GetModuleHandle(program_name),(LPTSTR)path, MAX_GEO_PATH_LENGTH);
+    GetModuleFileName(GetModuleHandle(widen(program_name).c_str()),(LPTSTR)path, MAX_GEO_PATH_LENGTH);
     path_len = (int)strlen(path);
   }
   else

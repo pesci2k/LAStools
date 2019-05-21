@@ -93,7 +93,7 @@ BOOL LASwriterBIN::open(const char* file_name, const LASheader* header, const ch
     return FALSE;
   }
 
-  file = fopen(file_name, "wb");
+  file = fopen(widen(file_name).c_str(), widen("wb").c_str());
 
   if (file == 0)
   {

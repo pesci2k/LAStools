@@ -1094,7 +1094,7 @@ int main(int argc, char *argv[])
         lasreader->close();
         delete lasreader;
       }
-      FILE* file = fopen(file_name, "rb+");
+      FILE* file = fopen(widen(file_name).c_str(), widen("rb+").c_str());
       if (file == 0)
       {
         fprintf (stderr, "ERROR: could not open file '%s' for edit of header\n", file_name);
@@ -1373,7 +1373,7 @@ int main(int argc, char *argv[])
 #ifdef _WIN32
       WIN32_FILE_ATTRIBUTE_DATA attr;
 	    SYSTEMTIME creation;
-      GetFileAttributesEx(lasreadopener.get_file_name(), GetFileExInfoStandard, &attr);
+      GetFileAttributesEx(widen(lasreadopener.get_file_name()).c_str(), GetFileExInfoStandard, &attr);
 	    FileTimeToSystemTime(&attr.ftCreationTime, &creation);
       int startday[13] = {-1, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
       set_creation_day = startday[creation.wMonth] + creation.wDay;
@@ -1401,7 +1401,7 @@ int main(int argc, char *argv[])
         usage(true);
       }
       // open the text output file
-      file_out = fopen(laswriteopener.get_file_name(), "w");
+      file_out = fopen(widen(laswriteopener.get_file_name()).c_str(), widen("w").c_str());
       if (file_out == 0)
       {
         fprintf (stderr, "WARNING: could not open output text file '%s'\n", laswriteopener.get_file_name());
@@ -4033,7 +4033,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "ERROR: can only repair header for LAS or LAZ files, not for '%s'\n", lasreadopener.get_file_name());
         repair_bb = repair_counters = false;
       }
-      file = fopen(lasreadopener.get_file_name(), "rb+");
+      file = fopen(widen(lasreadopener.get_file_name()).c_str(), widen("rb+").c_str());
       if (file == 0)
       {
         fprintf (stderr, "ERROR: could not reopen file '%s' for repair of header\n", lasreadopener.get_file_name());

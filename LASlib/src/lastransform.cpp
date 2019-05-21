@@ -673,7 +673,7 @@ public:
     {
       map[u] = u;
     }
-    FILE* file = fopen(file_name, "r");
+    FILE* file = fopen(widen(file_name).c_str(), widen("r").c_str());
     if (file)
     {
       U32 from, to;
@@ -1117,7 +1117,7 @@ public:
     {
       map[u] = u;
     }
-    FILE* file = fopen(file_name, "r");
+    FILE* file = fopen(widen(file_name).c_str(), widen("r").c_str());
     if (file)
     {
       U32 from, to;
@@ -1216,7 +1216,7 @@ public:
     {
       map[u] = u;
     }
-    FILE* file = fopen(file_name, "r");
+    FILE* file = fopen(widen(file_name).c_str(), widen("r").c_str());
     if (file)
     {
       U32 from, to;
@@ -3888,7 +3888,7 @@ BOOL LAStransform::parse(int argc, char* argv[])
           fprintf(stderr,"ERROR: '%s' needs 1 argument: map_file_name.txt\n", argv[i]);
           return FALSE;
         }
-        FILE* file = fopen(argv[i+1], "r");
+        FILE* file = fopen(widen(argv[i+1]).c_str(), widen("r").c_str());
         if (file == 0)
         {
           fprintf(stderr,"ERROR: cannot '%s' needs text file with map but '%s' cannot be opened\n", argv[i], argv[i+1]);
@@ -3908,7 +3908,7 @@ BOOL LAStransform::parse(int argc, char* argv[])
           fprintf(stderr,"ERROR: '%s' needs 1 argument: map_file_name.txt\n", argv[i]);
           return FALSE;
         }
-        FILE* file = fopen(argv[i+1], "r");
+        FILE* file = fopen(widen(argv[i+1]).c_str(), widen("r").c_str());
         if (file == 0)
         {
           fprintf(stderr,"ERROR: cannot '%s' needs text file with map but '%s' cannot be opened\n", argv[i], argv[i+1]);
@@ -3928,7 +3928,7 @@ BOOL LAStransform::parse(int argc, char* argv[])
           fprintf(stderr,"ERROR: '%s' needs 1 argument: map_file_name.txt\n", argv[i]);
           return FALSE;
         }
-        FILE* file = fopen(argv[i+1], "r");
+        FILE* file = fopen(widen(argv[i+1]).c_str(), widen("r").c_str());
         if (file == 0)
         {
           fprintf(stderr,"ERROR: cannot '%s' needs text file with map but '%s' cannot be opened\n", argv[i], argv[i+1]);

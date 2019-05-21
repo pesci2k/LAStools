@@ -55,6 +55,7 @@ set(LAZ_SRC
 	lasindex.cpp
 	lasquadtree.cpp
 	lasinterval.cpp
+	unicode.cpp
 )
 
 foreach(file ${LAZ_SRC})

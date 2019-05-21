@@ -51,7 +51,7 @@ BOOL LASreaderMerged::add_file_name(const char* file_name)
     return FALSE;
   }
   // does the file exist
-  FILE* file = fopen(file_name, "r");
+  FILE* file = fopen(widen(file_name).c_str(), widen("r").c_str());
   if (file == 0)
   {
     fprintf(stderr, "ERROR: file '%s' cannot be opened\n", file_name);

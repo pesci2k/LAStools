@@ -115,7 +115,7 @@ BOOL LASreaderPLY::open(FILE* file, const CHAR* file_name, U8 point_type, BOOL p
   {
     WIN32_FILE_ATTRIBUTE_DATA attr;
 	  SYSTEMTIME creation;
-    GetFileAttributesEx(file_name, GetFileExInfoStandard, &attr);
+    GetFileAttributesEx(widen(file_name).c_str(), GetFileExInfoStandard, &attr);
 	  FileTimeToSystemTime(&attr.ftCreationTime, &creation);
     int startday[13] = {-1, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
     header.file_creation_day = startday[creation.wMonth] + creation.wDay;

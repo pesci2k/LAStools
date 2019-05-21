@@ -120,11 +120,11 @@ BOOL LASwaveform13reader::open(const char* file_name, I64 start_of_waveform_data
   {
     if (!compressed && (strstr(".wdp", file_name) || strstr(".WDP", file_name)))
     {
-      file = fopen(file_name, "rb");
+      file = fopen(widen(file_name).c_str(), widen("rb").c_str());
     }
     else if (compressed && (strstr(".wdz", file_name) || strstr(".WDZ", file_name)))
     {
-      file = fopen(file_name, "rb");
+      file = fopen(widen(file_name).c_str(), widen("rb").c_str());
     }
     else
     {
@@ -142,13 +142,13 @@ BOOL LASwaveform13reader::open(const char* file_name, I64 start_of_waveform_data
         file_name_temp[len-2] = 'd';
         file_name_temp[len-1] = (compressed ? 'z' : 'p');
       }
-      file = fopen(file_name_temp, "rb");
+      file = fopen(widen(file_name_temp).c_str(), widen("rb").c_str());
       free(file_name_temp);
     }
   }
   else
   {
-    file = fopen(file_name, "rb");
+    file = fopen(widen(file_name).c_str(), widen("rb").c_str());
   }
 
   if (file == 0)

@@ -1965,7 +1965,7 @@ BOOL LASreadOpener::parse(int argc, char* argv[])
         fprintf(stderr,"ERROR: '%s' needs at least 1 argument: file_name\n", argv[i]);
         return FALSE;
       }
-      FILE* file = fopen(argv[i+1], "r");
+      FILE* file = fopen(widen(argv[i+1]).c_str(), widen("r").c_str());
       if (file == 0)
       {
         fprintf(stderr, "ERROR: cannot open '%s'\n", argv[i+1]);
@@ -2282,7 +2282,7 @@ BOOL LASreadOpener::add_file_name(const CHAR* file_name, BOOL unique)
   BOOL r = FALSE;
   HANDLE h;
   WIN32_FIND_DATA info;
-  h = FindFirstFile(file_name, &info);
+  h = FindFirstFile(widen(file_name).c_str(), &info);
   if (h != INVALID_HANDLE_VALUE)
   {
     // find the path
@@ -2295,7 +2295,7 @@ BOOL LASreadOpener::add_file_name(const CHAR* file_name, BOOL unique)
       strncpy(full_file_name, file_name, len);
 	    do
 	    {
-        sprintf(&full_file_name[len], "%s", info.cFileName);
+        sprintf(&full_file_name[len], "%s", narrow(info.cFileName).c_str());
         if (add_file_name_single(full_file_name, unique)) r = TRUE;
   	  } while (FindNextFile(h, &info));
     }
@@ -2303,7 +2303,7 @@ BOOL LASreadOpener::add_file_name(const CHAR* file_name, BOOL unique)
     {
       do
       {
-        if (add_file_name_single(info.cFileName, unique)) r = TRUE;
+        if (add_file_name_single(narrow(info.cFileName).c_str(), unique)) r = TRUE;
   	  } while (FindNextFile(h, &info));
     }
 	  FindClose(h);
@@ -2353,7 +2353,7 @@ BOOL LASreadOpener::add_file_name(const CHAR* file_name, BOOL unique)
 
 BOOL LASreadOpener::add_list_of_files(const CHAR* list_of_files, BOOL unique)
 {
-  FILE* file = fopen(list_of_files, "r");
+  FILE* file = fopen(widen(list_of_files).c_str(), widen("r").c_str());
   if (file == 0)
   {
     fprintf(stderr, "ERROR: cannot open '%s'\n", list_of_files);
@@ -2408,7 +2408,7 @@ BOOL LASreadOpener::add_neighbor_file_name(const CHAR* neighbor_file_name, BOOL 
   BOOL r = FALSE;
   HANDLE h;
   WIN32_FIND_DATA info;
-  h = FindFirstFile(neighbor_file_name, &info);
+  h = FindFirstFile(widen(neighbor_file_name).c_str(), &info);
   if (h != INVALID_HANDLE_VALUE)
   {
     // find the path
@@ -2421,7 +2421,7 @@ BOOL LASreadOpener::add_neighbor_file_name(const CHAR* neighbor_file_name, BOOL 
       strncpy(full_neighbor_file_name, neighbor_file_name, len);
 	    do
 	    {
-        sprintf(&full_neighbor_file_name[len], "%s", info.cFileName);
+        sprintf(&full_neighbor_file_name[len], "%s", narrow(info.cFileName).c_str());
         if (add_neighbor_file_name_single(full_neighbor_file_name, unique)) r = TRUE;
   	  } while (FindNextFile(h, &info));
     }
@@ -2429,7 +2429,7 @@ BOOL LASreadOpener::add_neighbor_file_name(const CHAR* neighbor_file_name, BOOL 
     {
       do
       {
-        if (add_neighbor_file_name_single(info.cFileName, unique)) r = TRUE;
+        if (add_neighbor_file_name_single(narrow(info.cFileName).c_str(), unique)) r = TRUE;
   	  } while (FindNextFile(h, &info));
     }
 	  FindClose(h);

@@ -959,7 +959,7 @@ int main(int argc, char *argv[])
         {
           wave_form_file_name = LASCopyString("wave_form.wdp");
         }
-        FILE* file = fopen(wave_form_file_name, "wb");
+        FILE* file = fopen(widen(wave_form_file_name).c_str(), widen("wb").c_str());
         if (file)
         {
           if (verbose) fprintf(stderr,"writing waveforms to '%s'\n", wave_form_file_name);

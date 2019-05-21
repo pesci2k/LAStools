@@ -116,7 +116,7 @@ static double taketime()
 static bool save_vlrs_to_file(const LASheader* header)
 {
   U32 i;
-  FILE* file = fopen("vlrs.vlr", "wb");
+  FILE* file = fopen(widen("vlrs.vlr").c_str(), widen("wb").c_str());
   if (file == 0)
   {
     return false;
@@ -188,7 +188,7 @@ static bool save_vlrs_to_file(const LASheader* header)
 static bool load_vlrs_from_file(LASheader* header)
 {
   U32 i;
-  FILE* file = fopen("vlrs.vlr", "rb");
+  FILE* file = fopen(widen("vlrs.vlr").c_str(), widen("rb").c_str());
   if (file == 0)
   {
     return false;

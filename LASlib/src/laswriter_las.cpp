@@ -64,7 +64,7 @@ BOOL LASwriterLAS::open(const char* file_name, const LASheader* header, U32 comp
     return FALSE;
   }
 
-  file = fopen(file_name, "wb");
+  file = fopen(widen(file_name).c_str(), widen("wb").c_str());
   if (file == 0)
   {
     fprintf(stderr, "ERROR: cannot open file '%s'\n", file_name);

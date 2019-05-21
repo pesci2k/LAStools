@@ -42,7 +42,7 @@ BOOL LASwriterWRL::open(const CHAR* file_name, const LASheader* header, const CH
     return FALSE;
   }
 
-  file = fopen(file_name, "w");
+  file = fopen(widen(file_name).c_str(), widen("w").c_str());
 
   if (file == 0)
   {

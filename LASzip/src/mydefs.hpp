@@ -45,6 +45,11 @@
 #endif
 #endif // _WIN32
 
+#include "unicode.hpp"
+#if defined(_WIN32) && defined(UNICODE)
+#define fopen _wfopen
+#endif
+
 typedef char               CHAR;
 
 typedef int                I32;
